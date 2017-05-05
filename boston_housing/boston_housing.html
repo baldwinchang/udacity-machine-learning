@@ -11779,7 +11779,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import libraries necessary for this project</span>
@@ -11853,7 +11853,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Minimum price of the data</span>
@@ -11967,7 +11967,7 @@ Standard deviation of prices: $165,171.13
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;r2_score&#39;</span>
@@ -12033,7 +12033,7 @@ Standard deviation of prices: $165,171.13
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Calculate the performance of this model</span>
@@ -12094,14 +12094,14 @@ Standard deviation of prices: $165,171.13
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;train_test_split&#39;</span>
 <span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
 <span class="c1"># TODO: Shuffle and split the data into training and testing subsets</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">prices</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">prices</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
 <span class="c1"># Success</span>
 <span class="k">print</span> <span class="s2">&quot;Training and testing split was successful.&quot;</span>
@@ -13768,6 +13768,9 @@ RCRiKOmJiEjEUNITEZGI8b9rrM1MFaKF0gAAAABJRU5ErkJggg==
 <p><strong>Answer: </strong></p>
 <p>Grid search takes all of the possible parameter values and systematically works through all of the combinations against a learning algorithm.</p>
 <p>This eliminates the guesswork in tuning your parameters. However this is a brute force method that is plagued with the curse of dimensionality.</p>
+<p>-- Revision #1:
+The inputs are an estimator, a parameter grid, and a scoring function. The estimator is typically our model, or a model with a scorer. The parameter grid is a dictionary listing all possible parameters and parameter values. The scoring function provides a method in which to compare the performance of the parameters tested.</p>
+<p>What GridSearch does is take that parameter grid, and brute force every possible combination (hence the grid). It will take those combinations and feed them into our model as parameters to tune that model. With that scoring function, we can try out all possible parameters of our model against our data (X,y). What comes out of .best_estimator_ is our best tuned and trained model.</p>
 
 </div>
 </div>
@@ -13790,6 +13793,9 @@ RCRiKOmJiEjEUNITEZGI8b9rrM1MFaKF0gAAAABJRU5ErkJggg==
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <p>K-fold cross validation requires us to use k distinct sets of training and test data. The benefit of this is to avoid taking a training and test set that is clustered and does not represent the data population.</p>
+<p>-- Revision #1: K-fold cross validation takes our data set and splits it into k equally sized bins. For i in 1..k iterations, we set aside the ith bin as our test set and the rest as our training set. We score our model based on our test set of that iteration. After iterating through k times, we take the average of those scores and use that as our score of that model.</p>
+<p>This helps us avoid overfitting our model to a specific training and test set we choose. However, this does not take into account the ordering of our data set if our data set is not sufficiently randomized.</p>
+<p>In terms of applying K-fold to GridSearch, we can validate our parameter tuning (through GridSearch) by scoring that model across the K-folded training and test sets. Essentially, we are getting a stronger scoring estimate (and in turn, a more accurate ranking of the combination of parameters tuned) for our GridSearch.</p>
 
 </div>
 </div>
