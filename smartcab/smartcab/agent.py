@@ -45,10 +45,11 @@ class LearningAgent(Agent):
             self.epsilon = 0
             self.alpha = 0
         else:
-            #epsilon_decay = self.trial ** -2 if self.trial != 1 else 0
-            #epsilon_decay = 0.05
+            #epsilon_decay = self.trial ** -2 if self.trial != 0 else 1
+            #epsilon_decay = 0.02
             #self.epsilon = max(0, self.epsilon - epsilon_decay)
             self.epsilon = max(0, 0.99 ** self.trial)
+            #self.epsilon = (0.95 * (self.trial ** -2)) + 0.04 if self.trial != 0 else 1
 
         self.trial += 1
 
@@ -75,10 +76,8 @@ class LearningAgent(Agent):
         
         # Set 'state' as a tuple of relevant data for the agent
         light = inputs.get('light')
-        right = inputs.get('right')
-        left = inputs.get('left')
         oncoming = inputs.get('oncoming')        
-        state = (light, right, oncoming, waypoint)
+        state = (light, oncoming, waypoint)
 
         return state
 
